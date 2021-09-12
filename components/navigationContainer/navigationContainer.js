@@ -18,8 +18,8 @@ const CustomDarkTheme = {
     ...DarkTheme,
     colors: {
         ...DarkTheme.colors,
-        customBackgroundInside: '#323546',
-        background: '#191A1F'
+        customBackgroundInside: '#161b22',
+        background: '#0d1117'
     },
 };
 

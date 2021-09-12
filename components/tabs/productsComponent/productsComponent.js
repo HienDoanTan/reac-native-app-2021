@@ -106,24 +106,6 @@ export default function ProductsComponent(props) {
         <SafeAreaView style={[styles.container, {backgroundColor: colors.background}]}>
             <View style={{flex: 1, flexDirection: 'column'}}>
                 <View style={{flex: 1, flexDirection: 'column'}}>
-                    <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                        <View style={{flex: 8}}>
-                            {/*<SearchBar*/}
-                            {/*    lightTheme={true}*/}
-                            {/*    containerStyle={{paddingHorizontal: 5, marginTop: StatusBar.currentHeight || 0, flex: 1}}*/}
-                            {/*    inputContainerStyle={{height: 30}}*/}
-                            {/*    inputStyle={{fontSize: 13}}*/}
-                            {/*    placeholder="Type Here..."*/}
-                            {/*    round={true}*/}
-                            {/*    onChangeText={(value => updateSearch(value))}*/}
-                            {/*    value={search}*/}
-                            {/*/>*/}
-                        </View>
-                        <View style={{flex: 2}}>
-
-                        </View>
-
-                    </View>
                     {ListMenuComponent()}
                 </View>
                 <View style={{flex: 7}}>
@@ -146,54 +128,64 @@ export default function ProductsComponent(props) {
                                                         backgroundColor: colors.customBackgroundInside,
                                                         borderRadius: 20
                                                     }}>
-                                                        <View style={{
-                                                            flex: 1
-                                                        }}>
-                                                            <View style={{
-                                                                flex: 1,
-                                                                justifyContent: 'center',
-                                                                alignItems: 'center'
+                                                        <TouchableOpacity
+                                                            activeOpacity={0.9}
+                                                            onPress={() => {
+                                                                props.navigation.navigate("ProductsDetailsComponent", {param: item.title})
                                                             }}>
-                                                                <Image
-                                                                    source={{uri: item.url}}
-                                                                    style={{width: 100, height: 100}}
-                                                                    resizeMode={'cover'}
-                                                                />
-                                                            </View>
+                                                            <View style={{
+                                                                flex: 1
+                                                            }}>
+                                                                <View style={{
+                                                                    flex: 1,
+                                                                    justifyContent: 'center',
+                                                                    alignItems: 'center'
+                                                                }}>
+                                                                    <Image
+                                                                        source={{uri: item.url}}
+                                                                        style={{width: 100, height: 100}}
+                                                                        resizeMode={'cover'}
+                                                                    />
+                                                                </View>
 
-                                                            <View style={{
-                                                                flex: 2,
-                                                                justifyContent: 'space-between',
-                                                                alignItems: 'flex-start'
-                                                            }}>
-                                                                <Text numberOfLines={2} style={[styles.title, {
-                                                                    color: colors.text,
-                                                                    fontWeight: 'bold'
-                                                                }]}>{item.name}</Text>
-                                                                <Text
-                                                                    style={[styles.title, {
-                                                                        paddingVertical: 5,
-                                                                        color: colors.primary
-                                                                    }]}>Mã
-                                                                    hàng hóa:
-                                                                    104270</Text>
-                                                                <View
-                                                                    style={{flexDirection: 'row', paddingVertical: 5}}>
-                                                                    <View style={{flex: 1}}>
-                                                                        <Text
-                                                                            style={[styles.title, {color: colors.text}]}>
-                                                                            Giá bán lẻ khuyến nghị: </Text>
-                                                                    </View>
-                                                                    <View style={{flex: 1}}>
-                                                                        <Text
-                                                                            style={[styles.title, {
-                                                                                color: colors.text,
-                                                                                fontWeight: 'bold'
-                                                                            }]}>460,000₫</Text>
+                                                                <View style={{
+                                                                    flex: 2,
+                                                                    justifyContent: 'space-between',
+                                                                    alignItems: 'flex-start'
+                                                                }}>
+                                                                    <Text numberOfLines={2} style={[styles.title, {
+                                                                        color: colors.text,
+                                                                        fontWeight: 'bold'
+                                                                    }]}>{item.name}</Text>
+                                                                    <Text
+                                                                        style={[styles.title, {
+                                                                            paddingVertical: 5,
+                                                                            color: colors.primary
+                                                                        }]}>Mã
+                                                                        hàng hóa:
+                                                                        104270</Text>
+                                                                    <View
+                                                                        style={{
+                                                                            flexDirection: 'row',
+                                                                            paddingVertical: 5
+                                                                        }}>
+                                                                        <View style={{flex: 1}}>
+                                                                            <Text
+                                                                                style={[styles.title, {color: colors.text}]}>
+                                                                                Giá bán lẻ khuyến nghị: </Text>
+                                                                        </View>
+                                                                        <View style={{flex: 1}}>
+                                                                            <Text
+                                                                                style={[styles.title, {
+                                                                                    color: colors.text,
+                                                                                    fontWeight: 'bold'
+                                                                                }]}>460,000₫</Text>
+                                                                        </View>
                                                                     </View>
                                                                 </View>
                                                             </View>
-                                                        </View>
+                                                        </TouchableOpacity>
+
                                                         <View style={{flex: 1, justifyContent: 'flex-end'}}>
                                                             <TouchableOpacity
                                                                 activeOpacity={0.9}
@@ -201,7 +193,7 @@ export default function ProductsComponent(props) {
                                                                 }}
                                                                 style={{
                                                                     borderRadius: 20,
-                                                                    backgroundColor: '#D7465A',
+                                                                    backgroundColor: '#002f5f',
                                                                     height: 36
                                                                 }}>
                                                                 <View style={{
@@ -244,7 +236,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     header: {
-        fontSize: 22,
+        fontSize: 16,
         padding: 10
     },
     title: {

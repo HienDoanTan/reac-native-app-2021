@@ -8,7 +8,7 @@ import {
     Animated,
     TouchableOpacity
 } from 'react-native'
-import {Ionicons, FontAwesome5, MaterialCommunityIcons} from "@expo/vector-icons";
+import {Ionicons, Fontisto, FontAwesome, MaterialCommunityIcons} from "@expo/vector-icons";
 
 export default function MyTabBar({state, descriptors, navigation}) {
     const [tabBarShowLabel, set_tabBarShowLabel] = useState(true);
@@ -50,19 +50,19 @@ export default function MyTabBar({state, descriptors, navigation}) {
 
                 //----------
                 if (routeName === 'Home') {
-                    iconName = <Ionicons name={'home'} size={isFocused ? 40 : 25}
+                    iconName = <Ionicons name={'home'} size={isFocused ? 40 : 22}
                               color={isFocused ? options.activeTintColor : options.inactiveTintColor}/>
                 } else if (routeName === 'Products') {
-                    iconName = <MaterialCommunityIcons name={'shopping'} size={isFocused ? 40 : 25}
+                    iconName = <MaterialCommunityIcons name={'shopping'} size={isFocused ? 40 : 22}
                                          color={isFocused ? options.activeTintColor : options.inactiveTintColor}/>
-                } else if (routeName === 'Bag') {
-                    iconName = <Ionicons name={'home'} size={isFocused ? 40 : 25}
+                } else if (routeName === 'Notifications') {
+                    iconName = <Fontisto name={'bell-alt'} size={isFocused ? 40 : 22}
                                          color={isFocused ? options.activeTintColor : options.inactiveTintColor}/>
-                } else if (routeName === 'Wishlist') {
-                    iconName = <Ionicons name={'home'} size={isFocused ? 40 : 25}
+                } else if (routeName === 'Order') {
+                    iconName = <FontAwesome name={'history'} size={isFocused ? 40 : 22}
                                          color={isFocused ? options.activeTintColor : options.inactiveTintColor}/>
-                } else if (routeName === 'Profile') {
-                    iconName = <Ionicons name={'home'} size={isFocused ? 40 : 25}
+                } else if (routeName === 'Train') {
+                    iconName = <Ionicons name={'ios-bookmarks'} size={isFocused ? 40 : 22}
                                          color={isFocused ? options.activeTintColor : options.inactiveTintColor}/>
                 }
                 //----------

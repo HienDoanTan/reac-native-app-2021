@@ -20,6 +20,8 @@ import DrawerNavigatorComponent from "./../drawerNavigator/drawerNavigator";
 import MyTabBar from '../../components/tabBar';
 import ProductsComponent from "../tabs/productsComponent/productsComponent";
 import {useTheme} from "@react-navigation/native";
+import NotificationsComponent from "../tabs/notificationsComponent/notificationsComponent";
+import OrdersComponent from "../tabs/ordersComponent/ordersComponent";
 
 const Tab = createBottomTabNavigator();
 
@@ -33,11 +35,11 @@ function BottomTabNavigatorComponent() {
                 activeFeaturedTintColor: 'skyblue',
                 inactiveFeatureTintColor: 'white',
                 showLabel: true,
-                activeTintColor: '#D7465A',
-                inactiveTintColor: '#ccc',
+                activeTintColor: '#002f5f',
+                inactiveTintColor: '#95a5a6',
                 style: {
                     minHeight: 44,
-                    backgroundColor: colors.background,
+                    backgroundColor: colors.customBackgroundInside,
                     borderTopWidth: 1,
                     borderTopColor: colors.border
                 },
@@ -50,9 +52,9 @@ function BottomTabNavigatorComponent() {
             <Tab.Screen name="Products" component={ProductsComponent} options={{
                 headerShown: false
             }}/>
-            <Tab.Screen name="Bag" component={Bag}/>
-            <Tab.Screen name="Wishlist" component={Wishlist}/>
-            <Tab.Screen name="Profile" component={Profile}/>
+            <Tab.Screen name="Notifications" component={NotificationsComponent}/>
+            <Tab.Screen name="Order" component={OrdersComponent}/>
+            <Tab.Screen name="Train" component={Profile}/>
         </Tab.Navigator>
     );
 }

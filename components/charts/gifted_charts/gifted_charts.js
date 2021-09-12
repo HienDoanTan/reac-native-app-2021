@@ -1,4 +1,4 @@
-import {BarChart, LineChart} from "react-native-gifted-charts";
+import {BarChart, LineChart, PieChart} from "react-native-gifted-charts";
 import React, {useEffect, useState} from "react";
 import {Button, View} from 'react-native';
 import {useTheme} from "@react-navigation/native";

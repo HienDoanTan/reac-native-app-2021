@@ -6,6 +6,7 @@ import {
     Text,
     TouchableOpacity,
     useWindowDimensions,
+    StatusBar,
     View
 } from "react-native";
 import {useState} from "react";
@@ -33,7 +34,7 @@ const DrawerNavigatorComponent = (props) => {
     const CustomDrawerContent = (props) => {
         return (
             <DrawerContentScrollView {...props}>
-                <ScrollView>
+                <ScrollView style={{flex: 1}}>
                     <View style={{
                         flex: 1,
                         justifyContent: 'center',
