@@ -11,5 +11,9 @@ export default {
     'txt-training': 'Đào tạo',
     'txt-product': 'Sản phẩm',
     'txt-notifications': 'Thông báo',
-    'txt-order': 'Đơn hàng'
+    'txt-order': 'Đơn hàng',
+    'txt-dark-mode': 'Giao diện tối',
+    'txt-sign-out': 'Đăng xuất',
+    'txt-color': 'Màu sắc',
+    'txt-more': 'Xem thêm'
 };

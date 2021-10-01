@@ -1,81 +1,96 @@
 import * as React from 'react';
-import {View, Button, Text, Animated} from 'react-native';
+import {connect} from "react-redux";
+import {View, Button, Text} from 'react-native';
+import * as config_enum from "../../helpers/config_enums";
+import HomeHeaderStackNavigator from "./homeHeaderStackNavigator";
+import {getFocusedRouteNameFromRoute} from "@react-navigation/native";
+import Products_header_stack_navigator from "./products_header_stack_navigator";
+import {changeColor, changeLanguage, isDarkThemeTodo} from "../../redux/actions";
 import {createStackNavigator, CardStyleInterpolators} from '@react-navigation/stack';
 import BottomTabNavigatorComponent from "../bottomTabNavigators/bottomTabNavigators";
-import appearanceComponent from "../tabs/profileComponent/appearanceComponent/appearanceComponent";
-import AppText from "../../helpers/swicthLanguage";
-import {useTheme} from "@react-navigation/native";
-import ProductsDetailsComponent from "../tabs/productsComponent/products_details_component";
+import NotificationsHeaderStackNavigator from "./notifications_header_stack_navigator";
 
-function Test({navigation}) {
+function ModalScreen({navigation}) {
     return (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text>Profile screen</Text>
-            <Button title="Go back" onPress={() => navigation.goBack()}/>
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <Text style={{fontSize: 30}}>This is a modal!</Text>
+            <Button onPress={() => navigation.goBack()} title="Dismiss"/>
         </View>
     );
 }
 
-const forFade = ({current, next}) => {
-    const opacity = Animated.add(
-        current.progress,
-        next ? next.progress : 0
-    ).interpolate({
-        inputRange: [0, 1, 2],
-        outputRange: [0, 1, 0],
-    });
-
-    return {
-        leftButtonStyle: {opacity},
-        rightButtonStyle: {opacity},
-        titleStyle: {opacity},
-        backgroundStyle: {opacity},
-    };
-};
-
 const Stack = createStackNavigator();
 
+let routeName;
+
+function getHeaderTitle(route) {
+    return routeName = getFocusedRouteNameFromRoute(route) ?? config_enum.HOME_TAB;
+}
+
 function MyStack() {
-    const {colors} = useTheme();
+
     return (
-        <Stack.Navigator screenOptions={({route, navigation}) => ({
-            headerShown: false,
-            gestureEnabled: true,
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
-        })}>
+        <Stack.Navigator>
             <Stack.Screen
                 name="BottomTabNavigatorComponent"
                 component={BottomTabNavigatorComponent}
-            />
-            <Stack.Screen
-                name="appearance"
-                component={appearanceComponent}
                 options={({route}) => ({
-                    headerShown: true,
-                    title: <AppText style={{color: '#fff'}} i18nKey={'txt-appearance'}/>,
-                    headerStyle: {
-                        backgroundColor: '#002f5f'
-                    },
-                    headerTintColor: '#fff',
-                    headerTitleStyle: {
-                        fontWeight: 'normal'
-                    },
-                    headerTitleAlign: 'center'
+                    headerShown: false,
+                    headerTitle: getHeaderTitle(route),
                 })}
             />
             <Stack.Screen
-                name="ProductsDetailsComponent"
-                component={ProductsDetailsComponent}
-                options={({route}) => ({
-                    headerShown: true,
-                })}
+                name="MyModal"
+                component={ModalScreen}
+                options={{
+                    headerShown: false,
+                    cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid
+                }}/>
+        </Stack.Navigator>
+    );
+}
+
+function StackNavigatorComponent(props) {
+    return (
+        <Stack.Navigator screenOptions={({route, navigation}) => ({
+            gestureEnabled: true,
+            headerShown: true,
+            headerTitle: value => {
+                switch (routeName) {
+                    case config_enum.HOME_TAB:
+                        return <HomeHeaderStackNavigator {...props}/>;
+                    case config_enum.PRODUCTS_TAB:
+                        return <Products_header_stack_navigator value={value} {...props}/>;
+                    case config_enum.NOTIFICATIONS_TAB:
+                        return <NotificationsHeaderStackNavigator  {...props}/>;
+                    case config_enum.ORDER_TAB:
+                        return <Text>'My account'</Text>;
+                    case config_enum.MORE_TAB:
+                        return <Text>'My account'</Text>;
+                }
+
+            },
+        })}>
+            <Stack.Screen
+                name="MyStack"
+                component={MyStack}
             />
         </Stack.Navigator>
     );
 }
 
-export default function StackNavigatorComponent() {
-    return (
-        <MyStack/>
-    );
+const mapStateToProps = (state, ownProps) => {
+    return {
+        is_dark_theme: state.todos.is_dark_theme,
+        language: state.todos.language,
+        theme_color: state.todos.theme_color
+    }
 }
+
+const mapDispatchToProps = {isDarkThemeTodo, changeLanguage, changeColor}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(StackNavigatorComponent)
+

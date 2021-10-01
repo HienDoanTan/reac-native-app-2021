@@ -6,6 +6,7 @@ import {
     ActivityIndicator,
     Image,
     ScrollView,
+    StatusBar,
     TouchableOpacity,
     SafeAreaView, Switch
 } from "react-native";
@@ -24,20 +25,19 @@ import {Ionicons, FontAwesome, Fontisto, Feather, MaterialCommunityIcons} from '
 import {Pager, PagerProvider} from '@crowdlinker/react-native-pager';
 import {useState} from "react";
 import CarouselComponent from "../../carousel/carousel";
+import HomeNewsComponent from "./home_news_screens";
 
 const Drawer = createDrawerNavigator();
 
 function HomeComponent(props) {
     const [activeIndex, onChange] = useState(1);
     return (
-        <ScrollView>
             <SafeAreaView style={{flex: 1}}>
                 <View
                     style={{flex: 1, backgroundColor: 'white', justifyContent: 'center'}}>
-                    <CarouselComponent />
+                    <HomeNewsComponent />
                 </View>
             </SafeAreaView>
-        </ScrollView>
 
     );
 }

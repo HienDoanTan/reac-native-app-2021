@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
     SafeAreaView,
     View,
@@ -7,11 +7,20 @@ import {
     Text,
     Animated,
     TouchableOpacity
-} from 'react-native'
-import {Ionicons, Fontisto, FontAwesome, MaterialCommunityIcons} from "@expo/vector-icons";
+} from 'react-native';
+import {Avatar, Badge, Icon, withBadge} from 'react-native-elements';
+import {Ionicons, Entypo, Fontisto, FontAwesome, Feather} from "@expo/vector-icons";
+import {useTheme} from "@react-navigation/native";
+import * as config_enum from "../helpers/config_enums";
+import {useFonts} from "expo-font";
 
 export default function MyTabBar({state, descriptors, navigation}) {
-    const [tabBarShowLabel, set_tabBarShowLabel] = useState(true);
+    const akin = new Animated.Value(0);
+    const rotation = akin.interpolate({
+        inputRange: [-1, 1], // left side to right side
+        outputRange: ['-10deg', '10deg']// before that we have to check now it's perfect
+    });
+    const defaultSize = 24;
 
     return (
         <View style={{flexDirection: 'row'}}>
@@ -49,23 +58,33 @@ export default function MyTabBar({state, descriptors, navigation}) {
                 };
 
                 //----------
-                if (routeName === 'Home') {
-                    iconName = <Ionicons name={'home'} size={isFocused ? 40 : 22}
-                              color={isFocused ? options.activeTintColor : options.inactiveTintColor}/>
-                } else if (routeName === 'Products') {
-                    iconName = <MaterialCommunityIcons name={'shopping'} size={isFocused ? 40 : 22}
-                                         color={isFocused ? options.activeTintColor : options.inactiveTintColor}/>
-                } else if (routeName === 'Notifications') {
-                    iconName = <Fontisto name={'bell-alt'} size={isFocused ? 40 : 22}
-                                         color={isFocused ? options.activeTintColor : options.inactiveTintColor}/>
-                } else if (routeName === 'Order') {
-                    iconName = <FontAwesome name={'history'} size={isFocused ? 40 : 22}
-                                         color={isFocused ? options.activeTintColor : options.inactiveTintColor}/>
-                } else if (routeName === 'Train') {
-                    iconName = <Ionicons name={'ios-bookmarks'} size={isFocused ? 40 : 22}
-                                         color={isFocused ? options.activeTintColor : options.inactiveTintColor}/>
+                switch (routeName) {
+                    case config_enum.HOME_TAB:
+                        iconName = <Ionicons name={isFocused ? 'md-home' : 'md-home-outline'} size={defaultSize}
+                                             color={isFocused ? options.activeTintColor : options.inactiveTintColor}/>;
+                        break;
+                    case config_enum.PRODUCTS_TAB:
+                        iconName =
+                            <Animated.View style={{alignSelf: 'center', transform: [{rotate: rotation}]}}>
+                                <Entypo name="shopping-bag" size={defaultSize}
+                                        color={isFocused ? options.activeTintColor : options.inactiveTintColor}/>
+                            </Animated.View>;
+                        break;
+                    case config_enum.NOTIFICATIONS_TAB:
+                        iconName = <Fontisto name={'bell-alt'} size={defaultSize}
+                                             color={isFocused ? options.activeTintColor : options.inactiveTintColor}/>
+                        break;
+                    case config_enum.ORDER_TAB:
+                        iconName = <FontAwesome name={'history'} size={defaultSize}
+                                                color={isFocused ? options.activeTintColor : options.inactiveTintColor}/>
+                        break;
+                    case config_enum.MORE_TAB:
+                        iconName = <Feather name={'menu'} size={defaultSize}
+                                            color={isFocused ? options.activeTintColor : options.inactiveTintColor}/>
+                        break;
+                    default:
+                        null;
                 }
-                //----------
 
                 return (
                     <TouchableOpacity
@@ -80,16 +99,29 @@ export default function MyTabBar({state, descriptors, navigation}) {
                         key={index}
                     >
                         <View style={{alignItems: 'center', justifyContent: 'center', ...options.style}}>
-                            <View style={[{flex: 1}, isFocused ? styles.customIcon : styles.defaultIcon]}>
+                            <View style={{flex: 1}}>
                                 {iconName}
                             </View>
-                            {tabBarShowLabel && (
-                                <Text style={{color: isFocused ? options.activeTintColor : options.inactiveTintColor, fontSize: 12}}>
+                            <Badge
+                                containerStyle={{
+                                    top: -4,
+                                    right: -20
+
+                                }}
+                                badgeStyle={{
+                                    minHeight: 20,
+                                    minWidth: 20,
+                                    borderRadius: 20,
+                                    borderColor: 'red'
+                                }}
+                                value={5}
+                                status="error"/>
+                            {options.showLabel && (
+                                <Text style={{fontSize: 12}}>
                                     {label}
                                 </Text>
                             )}
                         </View>
-
                     </TouchableOpacity>
                 );
             })}

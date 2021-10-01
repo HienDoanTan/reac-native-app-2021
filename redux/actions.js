@@ -1,4 +1,4 @@
-import {ADD_TODO, CHANGE_LANGUAGE, DELETE_TODO, IS_DARK_THEME} from "./actionTypes";
+import {ADD_TODO, CHANGE_LANGUAGE, DELETE_TODO, IS_DARK_THEME, CHANGE_THEME_COLOR, IS_VISIBLE_SPEED_DIAL} from "./actionTypes";
 
 let nextTodoId = 0;
 
@@ -30,5 +30,13 @@ export const changeLanguage = language => {
         language
     }
 }
+
+export const changeColor = color => {
+    return {
+        type: CHANGE_THEME_COLOR,
+        color
+    }
+}
+
 
 

@@ -15,16 +15,41 @@ function NotificationsComponent() {
     useScrollToTop(React.useRef({
         scrollToTop: () => ref.current?.scrollToOffset({offset: -100}),
     }));
-    const keyExtractor = (item, index) => index.toString();
+
     const renderItem = ({item, index}) => (
-        <ListItem containerStyle={{backgroundColor: colors.background}} key={index} bottomDivider={false}>
+        <ListItem containerStyle={{
+            backgroundColor: colors.customBackgroundInside,
+            // padding: 10,
+            // marginBottom: 10,
+            // marginHorizontal: 10,
+            // borderRadius: 10,
+            flex: 1,
+            //
+            // shadowColor: colors.border,
+            // shadowOffset: {
+            //     width: 0,
+            //     height: 1,
+            // },
+            // shadowOpacity: 0.20,
+            // shadowRadius: 1.41,
+            // elevation: 2
+        }} key={index} bottomDivider={false}>
             <Avatar size="medium" rounded source={{uri: item.avatar_url}}/>
             <ListItem.Content>
                 <ListItem.Title style={{color: colors.text, fontWeight: 'bold'}}>{item.name}</ListItem.Title>
-                <ListItem.Subtitle style={{color: colors.text}}>{item.subtitle}</ListItem.Subtitle>
+                <ListItem.Subtitle style={{color: colors.text, paddingVertical: 5}}>{item.subtitle}</ListItem.Subtitle>
+                <View style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <Ionicons name="time" size={24} color={'#3498db'}/>
+                    <Text style={{color: '#95a5a6'}}>15 minutes ago</Text>
+                </View>
             </ListItem.Content>
             <TouchableOpacity onPress={() => refRBSheet.current.open()}>
-                <Entypo name="dots-three-horizontal" size={16} color={colors.text}/>
+                <Entypo name="dots-two-horizontal" size={16} color={colors.text}/>
             </TouchableOpacity>
         </ListItem>
     );
@@ -32,7 +57,7 @@ function NotificationsComponent() {
     return (
         <View style={{flex: 1}}>
             <FlatList
-                keyExtractor={keyExtractor}
+                keyExtractor={(item, index) => index.toString()}
                 data={list}
                 renderItem={renderItem}
                 showsHorizontalScrollIndicator={false}
@@ -43,13 +68,13 @@ function NotificationsComponent() {
                 ref={refRBSheet}
                 closeOnDragDown={true}
                 closeOnPressMask={true}
-                animationType={'fade'}
                 height={300}
                 openDuration={250}
                 customStyles={{
                     container: {
                         borderTopRightRadius: 10,
-                        borderTopLeftRadius: 10
+                        borderTopLeftRadius: 10,
+                        backgroundColor: colors.backgroundBottomTab
                     }
                 }}
             >

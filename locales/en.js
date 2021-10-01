@@ -11,5 +11,9 @@ export default {
     'txt-training': 'Training',
     'txt-product': 'Products',
     'txt-notifications': 'Notifications',
-    'txt-order': 'Order'
+    'txt-order': 'Order',
+    'txt-dark-mode': 'Dark mode',
+    'txt-sign-out': 'Sign Out',
+    'txt-color': 'Color',
+    'txt-more': 'More'
 };

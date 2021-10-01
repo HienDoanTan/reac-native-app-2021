@@ -15,7 +15,7 @@ export default function GiftedChartsComponent() {
     ];
 
     return (
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, marginBottom: 30}}>
             <BarChart
                 barWidth={22}
                 noOfSections={3}
@@ -27,6 +27,8 @@ export default function GiftedChartsComponent() {
                 yAxisTextStyle={{
                     color: colors.text
                 }}
+                rulesThickness={0}
+                rulesColor={colors.background}
             />
         </View>
     );

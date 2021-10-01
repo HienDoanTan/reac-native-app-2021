@@ -1,9 +1,16 @@
-import {ADD_TODO, DELETE_TODO, IS_DARK_THEME, CHANGE_LANGUAGE} from "../actionTypes";
+import {
+    ADD_TODO,
+    DELETE_TODO,
+    IS_DARK_THEME,
+    CHANGE_LANGUAGE,
+    CHANGE_THEME_COLOR
+} from "../actionTypes";
 
 const initialState = {
     todo_list: [],
     is_dark_theme: false,
-    language: 'vi'
+    language: 'vi',
+    theme_color: "#2980b9"
 };
 
 export default function (state = initialState, action) {
@@ -31,6 +38,9 @@ export default function (state = initialState, action) {
         }
         case CHANGE_LANGUAGE: {
             return {...state, language: action.language};
+        }
+        case CHANGE_THEME_COLOR: {
+            return {...state, theme_color: action.color};
         }
         default:
             return state;

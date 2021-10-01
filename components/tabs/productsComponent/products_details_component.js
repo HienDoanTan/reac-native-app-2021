@@ -1,5 +1,5 @@
 import React, {useRef, useState} from "react";
-import {StyleSheet, Text, View, Dimensions} from "react-native";
+import {StyleSheet, Text, View, Dimensions, Button} from "react-native";
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import {ActivityIndicator} from 'react-native';
 import {Image as ImageElement} from 'react-native-elements';
@@ -106,8 +106,8 @@ export default function ProductsDetailsComponent(props) {
     //     </View>
     // );
     return(
-        <View>
-            <Text>Text</Text>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <Button title={'CLick'} onPress={() => props.navigation.goBack()} />
         </View>
     )
 };
